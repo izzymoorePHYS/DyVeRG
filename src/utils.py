@@ -253,7 +253,7 @@ def graph_isomorphisms(g1: Graph, g2: Graph) -> Iterator[dict]:
         yield f
 
 
-def is_graph_isomorphic(g1: Graph, g2: Graph) -> Union[dict, None]:
+def is_graph_isomorphic(g1, g2):
     for f in graph_isomorphisms(g1, g2):
         return f
     return None
