@@ -236,6 +236,7 @@ def graph_edit_distance(g1: Graph, g2: Graph,
                    edge_subst_cost=edge_subst_cost,
                    edge_del_cost=edge_del_cost, edge_ins_cost=edge_ins_cost,
                    timeout=patience)
+        # TODO: no node insertion cost?
     except RecursionError:
         dist = (
             g1.order() + sum(g1.edges[u, v]['weight'] for u in g1 for v in g1 if (u, v) in g1.edges()) / 2
