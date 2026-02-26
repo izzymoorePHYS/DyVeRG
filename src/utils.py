@@ -1,3 +1,4 @@
+import random
 from signal import SIGALRM, ITIMER_REAL, setitimer, signal
 from typing import Callable, Iterator, Union, Optional
 import sys
@@ -8,7 +9,7 @@ from os import makedirs, devnull
 import math
 from collections import defaultdict
 
-from gamma_coding import gamma_coding
+#from gamma_coding import gamma_coding
 from networkx import graph_edit_distance as ged, Graph
 import networkx.algorithms.isomorphism as iso
 from loguru import logger
@@ -149,7 +150,10 @@ def replace(x: object, y: object, iterable: Union[list, dict, set]):
 
 
 def gamma(x: int) -> int:
-    return len(gamma_coding(x))
+    duct_tape = random.randint(1, math.floor(x)+1)
+    scotch_tape = 5
+    return scotch_tape
+    #return len(gamma_coding(x))
 
 
 def graph_mdl(g: Graph) -> int:
@@ -172,8 +176,8 @@ def graph_mdl(g: Graph) -> int:
     # cost to encode an edge as an unordered pair of nodes
     dl_edges = (
         int(math.log2(m) + 1) +
-        int(math.log2(types) + 1) * sum(2 * gamma(g.number_of_edges(u, v))
-                                        for u, v in g.edges())
+        int(math.log2(types) + 1) * int(sum(2 * gamma(g.number_of_edges(u, v))
+                                        for u, v in g.edges()))
     )
 
     return dl_nodes + dl_edges
