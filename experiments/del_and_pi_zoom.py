@@ -33,6 +33,11 @@ if __name__ == '__main__':
     sample_grammar = update_grammar(grammar_g, g, h, t1=1, t2=2, verbose=True)
     print(sample_grammar)
     print(sample_grammar.ll(1,2))
+    print("pi is the difference between rules at steps, see below.")
+    print(sample_grammar.decomposition)
+
+
+
     print("\n\n~~ Repeating with more intense additions ~~\n")
     g = nx.karate_club_graph()
     print("karate club: n, ",g.number_of_nodes(), "; v, ", g.number_of_edges())

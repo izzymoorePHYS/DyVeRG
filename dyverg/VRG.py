@@ -103,6 +103,7 @@ class VRG:
 
     # total cost (in terms of edit operations) incurred to dynamically augment this grammar
     def cost(self, prior: int, posterior: int, njobs: int = 1, verbose: bool = False) -> float:
+        #TODO: prior and posterior describe the difference in time we are looking at.
         if len(self.times) == 1:
             if prior == posterior:
                 return np.inf
@@ -115,6 +116,7 @@ class VRG:
                                            if prior in metarule.times)
             S = sum(terms)
         else:
+            #todo: self.decomposition -> pi
             S = sum(metarule.edits[prior, posterior]
                     for metarule, _, _ in tqdm(self.decomposition, desc='computing edits', disable=(not verbose))
                     if prior in metarule.times)

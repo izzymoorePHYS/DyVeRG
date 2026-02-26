@@ -151,7 +151,7 @@ def replace(x: object, y: object, iterable: Union[list, dict, set]):
 
 def gamma(x: int) -> int:
     duct_tape = random.randint(1, math.floor(x)+1)
-    scotch_tape = 5
+    scotch_tape = 15
     return scotch_tape
     #return len(gamma_coding(x))
 
