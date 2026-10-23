@@ -13,7 +13,10 @@ from tqdm import trange
 from src.data import load_data
 from src.decomposition import decompose
 from src.adjoin_graph import update_grammar
-from src.utils import mkdir
+from src.utils import graph_edit_distance, node_match_, edge_match_
+
+from evaluation.statistics import spectrum, degree_distribution
+from evaluation.mmd import mmd_rbf
 
 if __name__ == '__main__':
     g = nx.karate_club_graph()
@@ -27,15 +30,19 @@ if __name__ == '__main__':
     print("karate club w/ (8)<->(9): n, ", h.number_of_nodes(), "; v, ", h.number_of_edges())
     #nx.draw(h, with_labels=True)
     grammar_g = decompose(g, time=1)
-    grammar_h = decompose(h, time=2)
+    #grammar_h = decompose(h, time=2)
     print(grammar_g)
-    print(grammar_h)
+    #print(grammar_h)
     sample_grammar = update_grammar(grammar_g, g, h, t1=1, t2=2, verbose=True)
     print(sample_grammar)
     print(sample_grammar.ll(1,2))
     print("pi is the difference between rules at steps, see below.")
     print(sample_grammar.decomposition)
 
+    print("mmd differences between g, and h:")
+    print(mmd_rbf([spectrum(g)], [spectrum(h)]))
+    print("degree distribution:")
+    print(mmd_rbf([degree_distribution(g)], [degree_distribution(h)]))
 
 
     print("\n\n~~ Repeating with more intense additions ~~\n")
@@ -55,7 +62,12 @@ if __name__ == '__main__':
     sample_grammar = update_grammar(grammar_g, g, h1, t1=1, t2=2, verbose=True)
     print(sample_grammar)
     print(sample_grammar.ll(1, 2))
+    print(graph_edit_distance(g, h1,
+                              node_match=node_match_, edge_match=edge_match_))
 
-
-
+    print("mmd differences between g, and h:")
+    print("spectrum:")
+    print(mmd_rbf([spectrum(g)], [spectrum(h1)]))
+    print("degree distribution:")
+    print(mmd_rbf([degree_distribution(g)], [degree_distribution(h1)]))
 

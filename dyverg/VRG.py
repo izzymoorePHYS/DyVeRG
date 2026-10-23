@@ -67,7 +67,7 @@ class VRG:
         self.decomposition: list[list] = []
         self.cover: dict[int, dict[int, int]] = {}
         self.times: list[int] = []
-        # self.ruledict: dict[int, dict[int, list[MetaRule]]] = {}
+        #self.ruledict: dict[int, dict[int, list[MetaRule]]] = {}
 
         # self.penalty: float = 0
         # self.amplifier: float = 100
@@ -340,6 +340,7 @@ class VRG:
         vrg_copy.extraction_map = self.extraction_map.copy()
         vrg_copy.cover = self.cover.copy()
         vrg_copy.times = self.times.copy()
+        #vrg_copy.ruledict = self.ruledict.copy()
         return vrg_copy
 
     def __len__(self):

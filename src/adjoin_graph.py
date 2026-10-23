@@ -54,7 +54,7 @@ def update_grammar(grammar: VRG, home_graph: nx.Graph, away_graph: nx.Graph,
 
     charted_grammar: VRG = grammar.copy()
     charted_grammar.ensure(t2)
-
+    #Ensure copies rules from the latest timestep and checks that all previous times are present.
     nodes_domestic = set(home_graph.nodes())
     for v in away_graph:
         for t in charted_grammar.times:
@@ -64,7 +64,7 @@ def update_grammar(grammar: VRG, home_graph: nx.Graph, away_graph: nx.Graph,
 
     # node_additions: set[int] = set(away_graph.nodes()) - set(home_graph.nodes())
     node_deletions: set[int] = set(home_graph.nodes()) - set(away_graph.nodes())
-
+    # TODO: edge additions -> type 2: internal additions
     edge_additions: set[tuple[int, int]] = set(away_graph.edges()) - set(home_graph.edges())
     edge_deletions: set[tuple[int, int]] = set(home_graph.edges()) - set(away_graph.edges())
 
